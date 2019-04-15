@@ -1,0 +1,104 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Api test",
+    "description": "一个简单的测试"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "host": "localhost:8080",
+  "basePath": "/api/",
+  "tags": [
+    {
+      "name": "Stock",
+      "description": "获取股票信息"
+    }
+  ],
+  "paths": {
+    "/stock": {
+      "get": {
+        "summary": "获取股票信息",
+        "description": "获取全部股票信息",
+        "tags": [
+          "Stock"
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of Person",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Stock"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stock/{id}": {
+      "get": {
+        "summary": "获取单支股票信息",
+        "description": "返回单支股票信息",
+        "tags": [
+          "Stock"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "股票id",
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "选中的股票信息",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Stock"
+              }
+            }
+          },
+          "404": {
+            "description": "不存在, 接口错误"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Stock": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
+        },
+        "rating": {
+          "type": "integer"
+        },
+        "desc": {
+          "type": "string"
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
